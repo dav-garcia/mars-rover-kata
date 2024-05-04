@@ -12,6 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CommandFactoryTest {
 
     @Test
+    void given_null_string_when_parse_then_return_empty_sequence() {
+        final var factory = new CommandFactory();
+
+        final var result = factory.fromString(null);
+
+        assertThat(result).isEqualTo(new CommandSequence(Collections.emptyList()));
+    }
+
+    @Test
     void given_empty_string_when_parse_then_return_empty_sequence() {
         final var factory = new CommandFactory();
 

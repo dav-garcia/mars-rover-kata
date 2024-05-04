@@ -9,7 +9,9 @@ public class MoveCommand implements Command {
     @Override
     public Position applyTo(final Position position) {
         final var direction = position.direction();
-        return new Position(position.x() + direction.getXIncrement(), position.y() + direction.getYIncrement(), direction);
+        final var x = position.x() + direction.getXIncrement();
+        final var y = position.y() + direction.getYIncrement();
+        return new Position(x, y, direction);
     }
 
     @Override

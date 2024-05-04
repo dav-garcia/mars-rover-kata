@@ -50,6 +50,4 @@ class MoveCommandTest {
 
         assertThat(result).isEqualTo(new Position(0, -1, S));
     }
-
-    // TODO: Wrap when overflow
 }

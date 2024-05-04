@@ -3,24 +3,37 @@ package com.github.davgarcia.marsroverkata.command;
 import com.github.davgarcia.marsroverkata.error.InvalidCommandFormatException;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class CommandFactory {
 
+    private final Command moveCommand;
+    private final Command leftCommand;
+    private final Command rightCommand;
+
+    public CommandFactory() {
+        moveCommand = new MoveCommand();
+        leftCommand = new LeftCommand();
+        rightCommand = new RightCommand();
+    }
+
     public Command moveCommand() {
-        return new MoveCommand();
+        return moveCommand;
     }
 
     public Command leftCommand() {
-        return new LeftCommand();
+        return leftCommand;
     }
 
     public Command rightCommand() {
-        return new RightCommand();
+        return rightCommand;
     }
 
     public Command fromString(final String command) {
-        final var list = new ArrayList<Command>(command.length());
-        for (var letter: command.toCharArray()) {
+        final var nonNullCommand = Optional.ofNullable(command).orElse("");
+        final var list = new ArrayList<Command>(nonNullCommand.length());
+
+        for (var letter: nonNullCommand.toCharArray()) {
             switch (letter) {
                 case 'M':
                     list.add(moveCommand());
