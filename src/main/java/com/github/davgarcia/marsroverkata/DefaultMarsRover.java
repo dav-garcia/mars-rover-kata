@@ -1,21 +1,23 @@
 package com.github.davgarcia.marsroverkata;
 
+import com.github.davgarcia.marsroverkata.command.Command;
+
 public class DefaultMarsRover implements MarsRover {
 
-    private MarsRoverPosition currentPosition;
+    private Position currentPosition;
 
     public DefaultMarsRover() {
-        currentPosition = new MarsRoverPosition();
+        currentPosition = new Position();
     }
 
     @Override
-    public MarsRoverPosition execute(final String command) {
-        currentPosition = MarsRoverPosition.fromString("2:3:N");
+    public Position execute(final Command command) {
+        currentPosition = command.applyTo(currentPosition);
         return currentPosition;
     }
 
     @Override
-    public MarsRoverPosition currentPosition() {
+    public Position currentPosition() {
         return currentPosition;
     }
 }

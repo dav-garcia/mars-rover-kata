@@ -1,8 +1,10 @@
 package com.github.davgarcia.marsroverkata;
 
+import com.github.davgarcia.marsroverkata.command.Command;
+
 public interface MarsRover {
 
-    MarsRoverPosition execute(String command);
+    Position execute(Command command);
 
-    MarsRoverPosition currentPosition();
+    Position currentPosition();
 }

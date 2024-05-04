@@ -1,6 +1,6 @@
 package com.github.davgarcia.marsroverkata;
 
-import org.junit.jupiter.api.Disabled;
+import com.github.davgarcia.marsroverkata.command.CommandFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -10,12 +10,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(MockitoExtension.class)
 class AcceptanceTest {
 
-    @Disabled
+    private static final CommandFactory FACTORY = new CommandFactory();
+
     @Test
     void given_M_when_execute_then_0_1_N() {
         final var marsRover = new DefaultMarsRover();
 
-        final var result = marsRover.execute("M");
+        final var result = marsRover.execute(FACTORY.moveCommand());
 
         assertThat(result).hasToString("0:1:N");
 
@@ -25,7 +26,7 @@ class AcceptanceTest {
     void given_MMRMMLM_when_execute_then_2_3_N() {
         final var marsRover = new DefaultMarsRover();
 
-        final var result = marsRover.execute("MMRMMLM");
+        final var result = marsRover.execute(FACTORY.fromString("MMRMMLM"));
 
         assertThat(result).hasToString("2:3:N");
     }

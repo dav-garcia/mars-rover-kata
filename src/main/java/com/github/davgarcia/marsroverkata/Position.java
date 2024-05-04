@@ -4,10 +4,10 @@ import com.github.davgarcia.marsroverkata.error.InvalidPositionFormatException;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public record MarsRoverPosition(int x, int y, MarsRoverDirection direction) {
+public record Position(int x, int y, Direction direction) {
 
     @NotNull
-    public static MarsRoverPosition fromString(final String position) {
+    public static Position fromString(final String position) {
         final var parts = StringUtils.split(position, ':');
 
         if (parts.length != 3) {
@@ -17,8 +17,8 @@ public record MarsRoverPosition(int x, int y, MarsRoverDirection direction) {
         try {
             final var x = Integer.parseInt(parts[0]);
             final var y = Integer.parseInt(parts[1]);
-            final var direction = MarsRoverDirection.valueOf(parts[2]);
-            return new MarsRoverPosition(x, y, direction);
+            final var direction = Direction.valueOf(parts[2]);
+            return new Position(x, y, direction);
         } catch (NumberFormatException e) {
             throw new InvalidPositionFormatException("Not a number: " + position, e);
         } catch (IllegalArgumentException e) {
@@ -26,8 +26,8 @@ public record MarsRoverPosition(int x, int y, MarsRoverDirection direction) {
         }
     }
 
-    public MarsRoverPosition() {
-        this(0, 0, MarsRoverDirection.N);
+    public Position() {
+        this(0, 0, Direction.N);
     }
 
     @Override
